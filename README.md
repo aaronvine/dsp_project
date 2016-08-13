@@ -4,7 +4,7 @@ Distributed System Programming: Hypernym Detection
 
 ### Steps
 
-1. **Extract patterns**:
+**Extract patterns**:
 
 * In the map part we're building a graph from the BIARCS, and extracting the patterns.
 The output key is the pattern (hashcode) and the value is the pair of nouns.
@@ -15,7 +15,7 @@ The output key is the pattern (hashcode) and the value is the pair of nouns.
 The output key is the pair and the value is the idx and num of appearances.
 
 
-2. **Build Vectors**:
+**Build Vectors**:
 
 * In the map part we're handling two inputs: 
 first step output (goes straight to the comparator) and the annotated set (from which we're extracting a tagged pair key and a boolean value).
@@ -26,7 +26,7 @@ first step output (goes straight to the comparator) and the annotated set (from 
 The output key is the pair and its value and the value is the vector.
 
 
-3. **Classifier**:
+**Classifier**:
 
 * We're using the provided WEKA package to extract a vector from each output (pair, value, vector).
 After that, the data is split to ten and for each iteration (ten in total), one will be a test set and the other nine are training sets.
