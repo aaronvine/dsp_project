@@ -69,7 +69,7 @@ public class BiarcGraph {
     private IntWritable extractPathHashCode(List<Edge> path) {
         String string = "";
         for (Edge edge: path){
-            string += ((Ngram)edge.getSource()).getLabel();
+            string += ((Ngram)edge.getSource()).label;
         }
         string += ((Ngram)path.get(path.size() - 1).getTarget()).label;
 

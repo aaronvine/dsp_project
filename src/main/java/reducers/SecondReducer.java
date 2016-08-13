@@ -3,13 +3,18 @@ package reducers;
 import java.io.IOException;
 
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.Reducer.Context;
 
-public class SecondReducer extends Reducer<NounPair, Text, Text, VectorWritable> {
+import utils.PairWritable;
+import utils.VectorWritable;
+
+public class SecondReducer extends Reducer<PairWritable, Text, Text, VectorWritable> {
     private String currentPair = null;
     private String currentPairValue = null;
 
 
-    public void reduce(NounPair key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+    public void reduce(PairWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
         
     	VectorWritable vw = new VectorWritable();
 
@@ -19,7 +24,7 @@ public class SecondReducer extends Reducer<NounPair, Text, Text, VectorWritable>
             if(isBooleanNP(ic)) {
                 // this is a new pair, update current pair and its value
                 this.currentPair = key.toString();
-                this.currentPairValue = key.getValue().toString();
+                this.currentPairValue = key.value.toString();
                 return;
             }
 

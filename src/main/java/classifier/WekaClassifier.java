@@ -1,3 +1,5 @@
+package classifier;
+
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.rules.ZeroR;
@@ -30,7 +32,7 @@ public class WekaClassifier {
         int attributesNum = 0;
 
         for (WekaTuple wekaTuple: wekaTupleList) {
-            attributesNum = Math.max(attributesNum, wekaTuple.getMaxIndex());
+            attributesNum = Math.max(attributesNum, wekaTuple.maxIdx);
         }
 
         for (int i = 1; i < attributesNum; i++) {
@@ -68,12 +70,12 @@ public class WekaClassifier {
                 }
 
                 for (WekaTuple wekaTuple : wekaTupleList) {
-                    trainSet.add(wekaTuple.getPatterns());
+                    trainSet.add(wekaTuple.patterns);
                 }
             }
 
             for (WekaTuple wekaTuple: curWekaTupleList) {
-                testSet.add(wekaTuple.getPatterns());
+                testSet.add(wekaTuple.patterns);
             }
 
             Classifier classifier = new ZeroR();

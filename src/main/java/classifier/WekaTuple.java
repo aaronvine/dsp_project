@@ -1,3 +1,5 @@
+package classifier;
+
 import weka.core.Instance;
 import weka.core.SparseInstance;
 
