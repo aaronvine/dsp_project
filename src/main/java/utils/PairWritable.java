@@ -1,3 +1,4 @@
+package utils;
 import org.apache.hadoop.io.*;
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -13,14 +14,14 @@ public class PairWritable implements Writable, WritableComparable<PairWritable> 
     public PairWritable() {
         this.noun1 = new Text();
         this.noun2 = new Text();
-        this.occurrences = new IntWritable(0);
+        this.numOfAppearances = new IntWritable(0);
         this.value = new BooleanWritable(false);
     }
 
     public PairWritable(String noun1, String noun2, int numOfAppearances) {
         this.noun1 = new Text(noun1);
         this.noun2 = new Text(noun2);
-        this.occurrences = new IntWritable(numOfAppearances);
+        this.numOfAppearances = new IntWritable(numOfAppearances);
         this.value = new BooleanWritable(false);
     }
 
@@ -86,8 +87,8 @@ public class PairWritable implements Writable, WritableComparable<PairWritable> 
         else
             return new IntWritable(2);
     }
-
-    public int compareTo(NounPair o) {
+    @Override
+    public int compareTo(PairWritable o) {
         int compareNoun1 = this.noun1.compareTo(o.noun1);
         if (compareNoun1 == 0) {
             int compareNoun2 = this.noun2.compareTo(o.noun2);

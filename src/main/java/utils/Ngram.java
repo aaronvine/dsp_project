@@ -1,3 +1,4 @@
+package utils;
 public class Ngram {
 
     public String word;
