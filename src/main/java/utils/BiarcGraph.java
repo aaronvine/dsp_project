@@ -1,3 +1,5 @@
+package utils;
+
 import org.apache.hadoop.io.*;
 import org.jgrapht.alg.DijkstraShortestPath;
 import org.jgrapht.graph.SimpleDirectedGraph;
@@ -10,13 +12,13 @@ public class BiarcGraph {
     private List<Ngram> ngrams;
     private SimpleDirectedGraph<Ngram, Edge> graph;
     private List<List<Edge>> paths;
-    private List<Pattern> patterns;
+    private List<PatternWritable> patterns;
     private int appearances;
 
     public BiarcGraph(Text text) {
         String[] splitted = text.toString().split("\t");
         ngrams = parse(splitted[1]);
-        this.occurrences = Integer.parseInt(splitted[2]);
+        this.appearances = Integer.parseInt(splitted[2]);
         this.paths = new ArrayList<List<Edge>>();
         buildGraph(ngrams);
         List<Ngram> nounsVertices = extractNounsVertices();
@@ -53,18 +55,18 @@ public class BiarcGraph {
         return ngrams;
     }
 
-    private List<Pattern> extractPatterns() {
-        List<Pattern> patterns = new ArrayList<Pattern>();
+    private List<PatternWritable> extractPatterns() {
+        List<PatternWritable> patterns = new ArrayList<PatternWritable>();
         for(List<Edge> path: paths){
             extractNounsFromPath(path);
-            Pattern pattern = new Pattern(extractPathHashCode(path), extractNounsFromPath(path));
+            PatternWritable pattern = new PatternWritable(extractPathHashCode(path), extractNounsFromPath(path));
             patterns.add(pattern);
         }
 
         return patterns;
     }
 
-    private IntWritable extractPathHashCode(List<MyEdge> path) {
+    private IntWritable extractPathHashCode(List<Edge> path) {
         String string = "";
         for (Edge edge: path){
             string += ((Ngram)edge.getSource()).getLabel();
@@ -74,7 +76,7 @@ public class BiarcGraph {
         return new IntWritable(string.hashCode());
     }
 
-    private Pair extractNounsFromPath(List<Edge> path) {
+    private PairWritable extractNounsFromPath(List<Edge> path) {
         String first = ((Ngram)path.get(0).getSource()).word;
         String second = ((Ngram)path.get(path.size() - 1).getTarget()).word;
         Stemmer stemmer = new Stemmer();
@@ -85,7 +87,7 @@ public class BiarcGraph {
         stemmer.stem();
         String stemmedSecond = stemmer.toString();
 
-        return new Pair(stemmedFirst, stemmedSecond, appearances);
+        return new PairWritable(stemmedFirst, stemmedSecond, appearances);
     }
 
     private void buildGraph(List<Ngram> ngrams) {
@@ -114,7 +116,7 @@ public class BiarcGraph {
         return nounGrams;
     }
 
-    public List<Pattern> getPatterns() {
+    public List<PatternWritable> getPatterns() {
         return patterns;
     }
 }

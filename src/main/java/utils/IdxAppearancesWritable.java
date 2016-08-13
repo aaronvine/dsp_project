@@ -1,3 +1,4 @@
+package utils;
 import org.apache.hadoop.io.*;
 import java.io.DataInput;
 import java.io.DataOutput;

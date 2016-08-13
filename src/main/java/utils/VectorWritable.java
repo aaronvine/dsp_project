@@ -1,3 +1,4 @@
+package utils;
 import org.apache.hadoop.io.*;
 import java.util.Vector;
 import java.io.DataInput;
@@ -21,8 +22,8 @@ public class VectorWritable implements Writable {
 
     public void readFields(DataInput dataInput) throws IOException {
         int vectorSize = dataInput.readInt();
-        vector = new Vector<Text>(size);
-        for (int i = 0; i < size; i++) {
+        vector = new Vector<Text>(vectorSize);
+        for (int i = 0; i < vectorSize; i++) {
             Text value = new Text();
             value.readFields(dataInput);
             vector.add(value);

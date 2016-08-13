@@ -1,3 +1,4 @@
+package utils;
 import org.apache.hadoop.io.*;
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -26,7 +27,7 @@ public class PatternWritable implements Writable {
         if (pair != null) {
             string += pair.toString();
         }
-        string += "," + appearances.toString() + "," + index.toString();
+        string += "," + appearances + "," + idx;
         return string;
     }
 
