@@ -18,21 +18,21 @@ public class Main {
 		System.out.println("hi! =]");
 	}
 	public static Job initFirstJob(String in, String out) throws IllegalArgumentException, IOException {
-		System.out.println("initializing first job..");
+//		System.out.println("initializing first job..");
 		Configuration conf = new Configuration();
 		Job job = new Job(conf, "job1");
-		job.setJarByClass(Main.class);
-		job.setMapperClass(WordCountMapper.class);
-		job.setCombinerClass(LongSumReducer.class);
-		job.setReducerClass(LongSumReducer.class);
-		job.setMapOutputKeyClass(WordsInDecadeWritable.class);
-		job.setMapOutputValueClass(LongWritable.class);
-		job.setOutputKeyClass(WordsInDecadeWritable.class);
-		job.setOutputValueClass(LongWritable.class);
-		job.setInputFormatClass(SequenceFileInputFormat.class);
-		FileInputFormat.addInputPath(job, new Path(in));
-		FileOutputFormat.setOutputPath(job, new Path(out));
-		System.out.println("first job created!");
+//		job.setJarByClass(Main.class);
+//		job.setMapperClass(WordCountMapper.class);
+//		job.setCombinerClass(LongSumReducer.class);
+//		job.setReducerClass(LongSumReducer.class);
+//		job.setMapOutputKeyClass(WordsInDecadeWritable.class);
+//		job.setMapOutputValueClass(LongWritable.class);
+//		job.setOutputKeyClass(WordsInDecadeWritable.class);
+//		job.setOutputValueClass(LongWritable.class);
+//		job.setInputFormatClass(SequenceFileInputFormat.class);
+//		FileInputFormat.addInputPath(job, new Path(in));
+//		FileOutputFormat.setOutputPath(job, new Path(out));
+//		System.out.println("first job created!");
 		return job;
 	}
 }
