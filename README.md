@@ -6,7 +6,7 @@ Distributed System Programming: Hypernym Detection
 
 1. Extract patterns:
 
-In the map part we're building a tree from the BIARCS, and extracting the patterns.
+In the map part we're building a graph from the BIARCS, and extracting the patterns.
 The output key is the pattern (hashcode) and the value is the pair of nouns.
 
 We're using a regular partitioner: pattern hashcode % num of reducers.
